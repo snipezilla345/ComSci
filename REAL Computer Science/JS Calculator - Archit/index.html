@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>JS Calculator</title>
+     <center>
+        <h1>JS Calculator</h1>
+        </center>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+    <body>
+        <center>
+            <div id="meme_picture"><img src="" height="250px" width="375px"></div>
+<div class="container">
+		<form name="calculator">
+			<input class="display" type="text" name="display" readonly>
+      <br>
+<div class="button">
+  			<input class="math" type="button" value="+" onclick="calculator.display.value += ' + '">
+  			<input class="math" type="button" value="-" onclick="calculator.display.value += ' - '">
+  			<input class="math" type="button" value="x" onclick="calculator.display.value += ' * '">
+  			<input class="math" type="button" value="÷" onclick="calculator.display.value += ' / '"> 
+            <input class="math" type="button" value="%" onclick="calculator.display.value += ' % '"> 
+  
+  <input class="random" type="button" value="►" onclick="doAutoFlip();"> 
+  <input class="random" type="button" value="!" onclick="stopFlip();">
+    <div class="upload-btn-wrapper">
+  <button class="random">()</button>
+  <input type="file" name="myfile" id="user_picture" onchange="update_image()"/>
+</div>
+    
+      <input class="button" type="button" value="7" onclick="calculator.display.value += '7'">
+			<input class="button" type="button" value="8" onclick="calculator.display.value += '8'">
+			<input class="button" type="button" value="9" onclick="calculator.display.value += '9'">
+			<input class="button" type="button" value="4" onclick="calculator.display.value += '4'">
+			<input class="button" type="button" value="5" onclick="calculator.display.value += '5'">
+			<input class="button" type="button" value="6" onclick="calculator.display.value += '6'">
+			<input class="button" type="button" value="1" onclick="calculator.display.value += '1'">
+			<input class="button" type="button" value="2" onclick="calculator.display.value += '2'">
+			<input class="button" type="button" value="3" onclick="calculator.display.value += '3'">
+			<input id="button" class="button" type="button" value="C" onclick="calculator.display.value = ''">
+			<input class="button" type="button" value="0" onclick="calculator.display.value += '0'">
+  <input class="button" type="button" value="." onclick="calculator.display.value += '.'">
+			<input class="equal" type="button" value="=" onclick="calculator.display.value = eval(calculator.display.value)">
+            </div>
+		</form>
+</div>
+            </center>
+    </body>

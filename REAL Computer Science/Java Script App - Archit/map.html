@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Flashlight + Google Maps</title>
+
+  <style>
+    #map {
+      height: 500px;
+      width: 1000px;
+      left: 0;
+      position: 0;
+      top: 0;
+      background-color: grey;
+  }
+  </style>
+</head>
+
+<style>
+body
+    {
+background-color: #ffffff;
+color: black;
+}
+</style>
+
+<body>
+
+<center>
+<br><br>
+  <nav>
+    <a href="index.html"><button><weak><ins>Flashlight</ins></weak></button></a>
+    <a href="map.html"><button><weak><ins>Map</ins></weak></button></a><br><br>
+</nav>
+    <h1>Google Map: Brampton</h1>
+<br>
+<div id="map"></div>
+    <form>
+        Select an emoji
+<select id="icon_to_use">
+  <option value="fastfood.png">Fast Food Restaurant</option>
+  <option value="gas.png">Gas Station</option>
+    <option value="gym.png">Gym</option>
+    <option value="movietheater.png">Movie Theater</option>
+    <option value="park.png">Park</option>
+    <option value="school.png">School</option>
+    <option value="trainstation.png">Train Station</option>
+</select>
+    </form>
+<script>
+    var map;
+	  var all_markers = [];
+	  var data = `43.690979 -79.802564 fastfood.png
+43.659520 -79.815920 fastfood.png
+43.697646 -79.798636 fastfood.png
+43.693190 -79.768375 fastfood.png
+43.708219 -79.783347 fastfood.png
+43.660060 -79.814463 fastfood.png
+43.700580 -79.778611 fastfood.png
+43.665585 -79.780780 fastfood.png
+43.667367 -79.779002 fastfood.png
+
+43.666456 -79.829575 gas.png
+43.682097 -79.803336 gas.png
+43.686500 -79.807319 gas.png
+43.676209 -79.769939 gas.png
+43.680390 -79.844752 gas.png
+43.696068 -79.798459 gas.png
+
+43.660145 -79.814495 gym.png
+43.692205 -79.799982 gym.png
+43.642726 -79.761433 gym.png
+43.683051 -79.779739 gym.png
+
+43.680384 -79.715855 movietheater.png
+43.733203 -79.768101 movietheater.png
+43.725940 -79.800146 movietheater.png
+
+43.647637 -79.779520 park.png 
+43.682424 -79.775701 park.png 
+43.647754 -79.760315 park.png 
+43.683565 -79.757856 park.png 
+43.669137 -79.736121 park.png 
+43.725972 -79.722130 park.png 
+
+43.668090 -79.826580 school.png
+43.659566 -79.803562 school.png
+43.663683 -79.810862 school.png
+43.641103 -79.809623 school.png
+43.635237 -79.779674 school.png
+43.668929 -79.786656 school.png
+43.666127 -79.795196 school.png
+43.656594 -79.780194 school.png
+
+43.681225 -79.813966 trainstation.png
+43.687480 -79.766421 trainstation.png
+43.590815 -79.788581 trainstation.png
+43.597606 -79.754321 trainstation.png`;     
+    
+	  var markers = data.split("\n");
+
+      function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: {lat: 43.666275, lng: -79.820358}
+      });
+          
+        map.addListener('click', function(e) {
+                var location = e.latLng;
+                place_marker(location);
+            });
+        function place_marker(location) {
+            var emoji = document.getElementById('icon_to_use').value;
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                icon: emoji
+            });
+            console.log(location.lat() + " " + location.lng() + " " + emoji);
+        }
+
+      var drawingManager = new google.maps.drawing.DrawingManager({
+        drawingMode: google.maps.drawing.OverlayType.MARKER,
+        drawingControl: true,
+        drawingControlOptions: {
+          position: google.maps.ControlPosition.TOP_CENTER,
+          drawingModes: ['marker', 'polyline','polygon', 'rectangle']
+        },
+        markerOptions: {icon: 'pin.png'},
+      });
+      drawingManager.setMap(map);
+
+
+	   if(navigator.geolocation) {
+    	     navigator.geolocation.watchPosition(set_my_position);
+	   }
+	   else {
+    	     alert("Geolocation doesn't work in your browser");
+	   }
+
+	for(var i=0; i < markers.length; i++){
+
+  		var marker_data = markers[i].trim();
+	    	marker_data = marker_data.split(" ");
+
+	  	var latitude = marker_data[0];
+	  	var longitude = marker_data[1];
+	  	var emoji = marker_data[2];
+
+	  	var marker_position = new google.maps.LatLng(marker_data[0], marker_data[1]);
+
+		var marker = new google.maps.Marker({
+
+ 	   	position: marker_position,
+ 	   	map: map,
+ 	   	icon: emoji
+		});
+
+    		all_markers.push(marker);
+	}
+              var trafficLayer = new google.maps.TrafficLayer();
+        trafficLayer.setMap(map);
+      }
+
+	function set_my_position (position){
+	  var emoji = "location.png"
+	  var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	  var marker = new google.maps.Marker({
+	    position: pos,
+	    map: map,
+	    icon: emoji
+	});
+	}
+
+</script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4wp1QSbAFgT_LqqPXO9zIcYpDLKAn0L0&libraries=drawing&callback=initMap"
+         async defer></script>
+</center>
+  </body>
+</html>

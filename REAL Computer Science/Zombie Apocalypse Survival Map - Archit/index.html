@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Zombie Apocalypse Map</title>
+    <link href="https://fonts.googleapis.com/css?family=Creepster" rel="stylesheet">
+    <meta name="description" content="A simple Google Maps app">
+    <meta name="keywords" content="Zombie, Survival,Map">
+
+    <style>
+        #zombie_map {
+            width: 1000px;
+            height: 600px;
+            background-color: grey;
+            margin: 0 auto;
+        }
+        h1 {
+            font-family: "Creepster";
+            text-align: center;
+            font-size: 2.2em;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Brampton Zombie Map</h1>
+    <div id="zombie_map"></div>
+    <form>
+        Select an emoji
+<select id="icon_to_use">
+  <option value="zombie.png">Zombie</option>
+  <option value="hospital.png">Hospital</option>
+    <option value="weapons.png">Weapons</option>
+</select>
+    </form>
+    <script>
+        var zombie_map;
+
+        function initMap() {
+
+            zombie_map = new google.maps.Map(document.getElementById('zombie_map'), {
+                zoom: 10,
+                center: {
+                    lat: 43.683334,
+                    lng: -79.766670
+                }
+            });
+            zombie_map.addListener('click', function(e) {
+                var location = e.latLng;
+                place_marker(location);
+            });
+
+        }
+
+        function place_marker(location) {
+            var emoji = document.getElementById('icon_to_use').value;
+            var marker = new google.maps.Marker({
+                position: location,
+                map: zombie_map,
+                icon: emoji
+            });
+            console.log(location.lat() + " " + location.lng() + " " + emoji);
+        }
+    </script>
+
+ <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjk3NqNM0Slj4g2-XDS0d_4Jvcar_reZg&callback=initMap">
+    </script>
+</body>
+
+</html>

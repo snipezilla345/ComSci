@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Tic Tac Toe - Archit Patel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="game.css">
+    <script type="text/javascript" src="game.js"></script>
+</head>
+<body>
+    
+<h1>Tic Tac Toe Battle</h1>
+
+<div>
+<table align="center">
+  <tr >
+    <td id="00" class="cell" onClick="clickBox(0,0);"></td>
+    <td id="01" class="cell" onClick="clickBox(0,1);"></td>
+    <td id="02" class="cell" onClick="clickBox(0,2);"></td>
+  </tr>
+    <tr>
+    <td id="10" class="cell" onClick="clickBox(1,0);"></td>
+    <td id="11" class="cell" onClick="clickBox(1,1);"></td>
+    <td id="12" class="cell" onClick="clickBox(1,2);"></td>
+  </tr>
+    <tr>
+    <td id="20" class="cell" onClick="clickBox(2,0);"></td>
+    <td id="21" class="cell" onClick="clickBox(2,1);"></td>
+    <td id="22" class="cell" onClick="clickBox(2,2);"></td>
+  </tr>
+  </table>
+    <br/>
+    <center>
+<input type=button onClick="reset();" value="Again">
+         </center>
+    </div>
+</body>
+</html>
